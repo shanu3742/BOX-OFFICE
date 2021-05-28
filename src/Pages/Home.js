@@ -1,7 +1,8 @@
 import React from 'react';
+import MainpageLayput from '../component/MainpageLayout';
 
 const home = () => {
-  return <div>This is home</div>;
+  return <MainpageLayput>This is home</MainpageLayput>;
 };
 
 export default home;
