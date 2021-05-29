@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MainpageLayout from '../component/MainpageLayout';
 
-const home = () => {
+const Home = () => {
+  const [input, setInput] = useState('');
   const onInputchange = searchtext => {
-    console.log(searchtext.target.value);
+    setInput(searchtext.target.value);
   };
   return (
     <MainpageLayout>
-      <input type="text" onChange={onInputchange} />
+      <input type="text" onChange={onInputchange} value={input} />
     </MainpageLayout>
   );
 };
 
-export default home;
+export default Home;
