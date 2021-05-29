@@ -1,11 +1,14 @@
 import React from 'react';
-import MainpageLayput from '../component/MainpageLayout';
+import MainpageLayout from '../component/MainpageLayout';
 
 const home = () => {
+  const onInputchange = searchtext => {
+    console.log(searchtext.target.value);
+  };
   return (
-    <MainpageLayput>
-      <input type="text" />
-    </MainpageLayput>
+    <MainpageLayout>
+      <input type="text" onChange={onInputchange} />
+    </MainpageLayout>
   );
 };
 
