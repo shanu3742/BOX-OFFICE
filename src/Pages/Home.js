@@ -4,6 +4,7 @@ import MainpageLayout from '../component/MainpageLayout';
 const Home = () => {
   const [input, setInput] = useState('');
   const [searchOption, setSearchOption] = useState('shows');
+  const isShowsSearch = searchOption === 'shows';
 
   const onInputchange = searchtext => {
     setInput(searchtext.target.value);
@@ -18,7 +19,7 @@ const Home = () => {
   const onSearch = async () => {
     // console.log(input);
     // now we put input in search
-    const API = `http://api.tvmaze.com/search/shows?q=${input}`;
+    const API = `http://api.tvmaze.com/search/${searchOption}?q=${input}`;
     try {
       const data = await fetch(API);
       const realdata = await data.json();
@@ -54,6 +55,7 @@ const Home = () => {
             id="shows-search"
             type="radio"
             value="shows"
+            checked={isShowsSearch}
             onClick={onRadioChange}
           />
         </label>
@@ -64,6 +66,7 @@ const Home = () => {
             id="actors-search"
             type="radio"
             value="people"
+            checked={!isShowsSearch}
             onClick={onRadioChange}
           />
         </label>
