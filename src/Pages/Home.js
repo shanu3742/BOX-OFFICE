@@ -7,6 +7,9 @@ const Home = () => {
   const onInputchange = searchtext => {
     setInput(searchtext.target.value);
   };
+  const onRadioChange = eve => {
+    console.log(eve.target.value);
+  };
 
   // onClick of search button we get input value store
 
@@ -45,12 +48,22 @@ const Home = () => {
       <div>
         <label htmlFor="shows-search">
           Shows
-          <input id="shows-search" type="radio" />
+          <input
+            id="shows-search"
+            type="radio"
+            value="shows"
+            onClick={onRadioChange}
+          />
         </label>
 
         <label htmlFor="actors-search">
           Actors
-          <input id="actors-search" type="radio" />
+          <input
+            id="actors-search"
+            type="radio"
+            value="people"
+            onClick={onRadioChange}
+          />
         </label>
       </div>
       <button type="button" onClick={onSearch}>
