@@ -3,13 +3,15 @@ import MainpageLayout from '../component/MainpageLayout';
 
 const Home = () => {
   const [input, setInput] = useState('');
+  const [searchOption, setSearchOption] = useState('shows');
 
   const onInputchange = searchtext => {
     setInput(searchtext.target.value);
   };
   const onRadioChange = eve => {
-    console.log(eve.target.value);
+    setSearchOption(eve.target.value);
   };
+  console.log(searchOption);
 
   // onClick of search button we get input value store
 
