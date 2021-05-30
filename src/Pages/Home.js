@@ -23,7 +23,10 @@ const Home = () => {
     try {
       const data = await fetch(API);
       const realdata = await data.json();
-      console.log(realdata);
+
+      realdata.map(el => {
+        return console.log(el.show.name);
+      });
     } catch (err) {
       console.log(err);
     }
