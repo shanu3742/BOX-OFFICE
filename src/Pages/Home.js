@@ -6,13 +6,14 @@ const Home = () => {
   const [searchOption, setSearchOption] = useState('shows');
   const isShowsSearch = searchOption === 'shows';
 
+  const [result, setResult] = useState([]);
   const onInputchange = searchtext => {
     setInput(searchtext.target.value);
   };
+
   const onRadioChange = eve => {
     setSearchOption(eve.target.value);
   };
-  console.log(searchOption);
 
   // onClick of search button we get input value store
 
@@ -23,10 +24,14 @@ const Home = () => {
     try {
       const data = await fetch(API);
       const realdata = await data.json();
+      if (realdata.length > 0) {
+        setResult(realdata);
+      }
+      if (realdata.length === 0) {
+        setResult(null);
+      }
 
-      realdata.map(el => {
-        return console.log(el.show.name);
-      });
+      // now we have to set the reasult
     } catch (err) {
       console.log(err);
     }
@@ -39,6 +44,29 @@ const Home = () => {
       // this function doing the same what onSearch function did so simply call onsearch function to performing same action here aslso
       onSearch();
     }
+  };
+
+  // console.log(result);
+  const showReasult = () => {
+    if (result !== null) {
+      return (
+        <div>
+          {result.map(el => {
+            if (searchOption === 'shows') {
+              return <div key={el.show.id}>{el.show.name}</div>;
+            }
+            if (searchOption === 'people') {
+              return <div key={el.person.id}>{el.person.name}</div>;
+            }
+            return null;
+          })}
+        </div>
+      );
+    }
+    if (result === null) {
+      return <div>search not find</div>;
+    }
+    return null;
   };
 
   return (
@@ -77,6 +105,7 @@ const Home = () => {
       <button type="button" onClick={onSearch}>
         Search
       </button>
+      {showReasult()}
     </MainpageLayout>
   );
 };
