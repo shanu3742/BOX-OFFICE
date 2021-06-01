@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import MainpageLayout from '../component/MainpageLayout';
+import ShowCard from '../component/show/ShowCard';
+import ActorCard from '../component/Actor/ActorCard';
 
 const Home = () => {
   const [input, setInput] = useState('');
@@ -51,10 +53,10 @@ const Home = () => {
     if (result !== null) {
       return result.map(el => {
         if (el.show) {
-          return <div key={el.show.id}>{el.show.name}</div>;
+          return <ShowCard key={el.show.id} el={el} />;
         }
         if (el.person) {
-          return <div key={el.person.id}>{el.person.name}</div>;
+          return <ActorCard key={el.person.id} el={el} />;
         }
         return null;
       });
