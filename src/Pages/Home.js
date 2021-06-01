@@ -48,17 +48,20 @@ const Home = () => {
 
   // console.log(result);
   const showReasult = () => {
-    if (result !== null) {
+    if (result !== null && result[0].show) {
       return (
         <div>
           {result.map(el => {
-            if (searchOption === 'shows') {
-              return <div key={el.show.id}>{el.show.name}</div>;
-            }
-            if (searchOption === 'people') {
-              return <div key={el.person.id}>{el.person.name}</div>;
-            }
-            return null;
+            return <div key={el.show.id}>{el.show.name}</div>;
+          })}
+        </div>
+      );
+    }
+    if (result !== null && result[0].person) {
+      return (
+        <div>
+          {result.map(el => {
+            return <div key={el.person.id}>{el.person.name}</div>;
           })}
         </div>
       );
