@@ -8,8 +8,8 @@ const Home = () => {
   const [input, setInput] = useState('');
   const [searchOption, setSearchOption] = useState('shows');
   const isShowsSearch = searchOption === 'shows';
-
   const [result, setResult] = useState([]);
+
   const onInputchange = searchtext => {
     setInput(searchtext.target.value);
   };
