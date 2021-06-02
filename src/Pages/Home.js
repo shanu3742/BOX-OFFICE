@@ -109,10 +109,11 @@ const Home = () => {
             onClick={onRadioChange}
           />
         </label>
+
+        <button type="button" onClick={onSearch}>
+          Search
+        </button>
       </div>
-      <button type="button" onClick={onSearch}>
-        Search
-      </button>
       {showReasult()}
     </MainpageLayout>
   );
