@@ -1,11 +1,14 @@
 import React from 'react';
 import IMAGE_NOT_FOUND from '../show/image/1.png';
 
+import StyledActorCard from './ActorCard.styled';
+
 const ActorCard = ({ el }) => {
   return (
-    <div>
+    <StyledActorCard>
       <div>
         <img
+          className="img-wrapper"
           src={el.person.image ? el.person.image.medium : IMAGE_NOT_FOUND}
           alt="actor"
         />
@@ -18,9 +21,11 @@ const ActorCard = ({ el }) => {
             : 'No country known'}
         </p>
         {el.person.birthday ? <p>Born {el.person.birthday}</p> : null}
-        <p>{el.person.deathday ? `Died ${el.person.deathday}` : 'Alive'}</p>
+        <p className="deathday">
+          {el.person.deathday ? `Died ${el.person.deathday}` : 'Alive'}
+        </p>
       </div>
-    </div>
+    </StyledActorCard>
   );
 };
 

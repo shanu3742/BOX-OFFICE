@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import MainpageLayout from '../component/MainpageLayout';
 import ShowCard from '../component/show/ShowCard';
 import ActorCard from '../component/Actor/ActorCard';
+import { FlexGrid } from '../component/styled';
 
 const Home = () => {
   const [input, setInput] = useState('');
@@ -53,10 +54,18 @@ const Home = () => {
     if (result !== null) {
       return result.map(el => {
         if (el.show) {
-          return <ShowCard key={el.show.id} el={el} />;
+          return (
+            <FlexGrid>
+              <ShowCard key={el.show.id} el={el} />
+            </FlexGrid>
+          );
         }
         if (el.person) {
-          return <ActorCard key={el.person.id} el={el} />;
+          return (
+            <FlexGrid>
+              <ActorCard key={el.person.id} el={el} />
+            </FlexGrid>
+          );
         }
         return null;
       });
