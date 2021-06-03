@@ -1,5 +1,9 @@
 import React, { useEffect, useReducer } from 'react';
 import { useParams } from 'react-router-dom';
+import Cast from '../component/show/Cast';
+import Details from '../component/show/Details';
+import Seasons from '../component/show/Seasons';
+import ShowMainData from '../component/show/ShowMainData';
 import apiGet from '../misc/config';
 
 const reducer = (prevState, action) => {
@@ -20,9 +24,6 @@ const initialState = {
 
 const Show = () => {
   const { id } = useParams();
-  // const [show, setShow] = useState(null);
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [error, setError] = useState(null);
 
   const [{ show, isLoading, error }, dispatch] = useReducer(
     reducer,
@@ -56,7 +57,19 @@ const Show = () => {
   }
   return (
     <div>
-      <h1>this is show page</h1>
+      <ShowMainData />
+      <div>
+        <h2>Details</h2>
+        <Details />
+      </div>
+      <div>
+        <h2>Seasons</h2>
+        <Seasons />
+      </div>
+      <div>
+        <h2>Cast</h2>
+        <Cast />
+      </div>
     </div>
   );
 };
