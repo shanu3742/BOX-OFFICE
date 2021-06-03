@@ -55,15 +55,15 @@ const Home = () => {
       return result.map(el => {
         if (el.show) {
           return (
-            <FlexGrid>
-              <ShowCard key={el.show.id} el={el} />
+            <FlexGrid key={el.show.id}>
+              <ShowCard el={el} />
             </FlexGrid>
           );
         }
         if (el.person) {
           return (
-            <FlexGrid>
-              <ActorCard key={el.person.id} el={el} />
+            <FlexGrid key={el.person.id}>
+              <ActorCard el={el} />
             </FlexGrid>
           );
         }
