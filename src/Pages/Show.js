@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useReducer } from 'react';
 import { useParams } from 'react-router-dom';
 import Cast from '../component/show/Cast';
@@ -24,6 +25,7 @@ const initialState = {
 
 const Show = () => {
   const { id } = useParams();
+  let isMounted = true;
 
   const [{ show, isLoading, error }, dispatch] = useReducer(
     reducer,
@@ -33,13 +35,20 @@ const Show = () => {
   useEffect(() => {
     apiGet(`/shows/${id}?embed[]=seasons&embed[]=cast`)
       .then(results => {
-        dispatch({ type: 'FETCH_SUCCESS', show: results });
+        if (isMounted) {
+          dispatch({ type: 'FETCH_SUCCESS', show: results });
+        }
       })
       .catch(err => {
-        dispatch({ type: 'FETCH_FAILED', error: err.message });
+        if (isMounted) {
+          dispatch({ type: 'FETCH_FAILED', error: err.message });
+        }
       });
+    return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      isMounted = false;
+    };
   }, [id]);
-  console.log(show);
 
   if (isLoading) {
     return (
@@ -57,18 +66,28 @@ const Show = () => {
   }
   return (
     <div>
-      <ShowMainData />
+      <ShowMainData
+        image={show.image}
+        name={show.name}
+        rating={show.rating}
+        summary={show.summary}
+        tags={show.genres}
+      />
       <div>
         <h2>Details</h2>
-        <Details />
+        <Details
+          status={show.status}
+          network={show.network}
+          premiered={show.premiered}
+        />
       </div>
       <div>
         <h2>Seasons</h2>
-        <Seasons />
+        <Seasons seasons={show._embedded.seasons} />
       </div>
       <div>
         <h2>Cast</h2>
-        <Cast />
+        <Cast cast={show._embedded.cast} />
       </div>
     </div>
   );
