@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useShow } from '../../misc/custom-hooks';
 import StyleShowCard from '../ShowCard.styled';
@@ -11,13 +11,14 @@ const ShowCard = ({ el }) => {
   const [starredShows, dispatchStarred] = useShow();
   const isStarred = starredShows.includes(el.show.id);
   const [summary] = [el.show.summary];
-  const onStarClick = () => {
+  console.log('render');
+  const onStarClick = useCallback(() => {
     if (isStarred) {
       dispatchStarred({ type: 'REMOVE', showid: el.show.id });
     } else {
       dispatchStarred({ type: 'ADD', showid: el.show.id });
     }
-  };
+  }, [dispatchStarred, isStarred, el.show.id]);
 
   const summaryAsText = summary
     ? `${summary.split('').slice(0, 50).join('').replace(/<.+?>/g, '')}...`
@@ -44,4 +45,4 @@ const ShowCard = ({ el }) => {
   );
 };
 
-export default ShowCard;
+export default memo(ShowCard);

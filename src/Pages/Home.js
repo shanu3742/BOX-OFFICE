@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import MainpageLayout from '../component/MainpageLayout';
 import ShowCard from '../component/show/ShowCard';
@@ -9,19 +9,48 @@ import { SearchInput, RadioInputsWrapper } from './Home.styled';
 import { SearchButtonWrapper } from './SearchButtonWrapper';
 import CustomRadio from './CustomRadio';
 
+const showReasult = result => {
+  if (result !== null) {
+    return result.map(el => {
+      if (el.show) {
+        return (
+          <FlexGrid key={el.show.id}>
+            <ShowCard el={el} />
+          </FlexGrid>
+        );
+      }
+      if (el.person) {
+        return (
+          <FlexGrid key={el.person.id}>
+            <ActorCard el={el} />
+          </FlexGrid>
+        );
+      }
+      return null;
+    });
+  }
+
+  if (result === null) {
+    return <div>search not find</div>;
+  }
+  return null;
+};
 const Home = () => {
   const [input, setInput] = useLastQueery();
   const [searchOption, setSearchOption] = useState('shows');
   const isShowsSearch = searchOption === 'shows';
   const [result, setResult] = useState([]);
 
-  const onInputchange = searchtext => {
-    setInput(searchtext.target.value);
-  };
+  const onInputchange = useCallback(
+    searchtext => {
+      setInput(searchtext.target.value);
+    },
+    [setInput]
+  );
 
-  const onRadioChange = eve => {
+  const onRadioChange = useCallback(eve => {
     setSearchOption(eve.target.value);
-  };
+  }, []);
 
   // onClick of search button we get input value store
 
@@ -55,32 +84,6 @@ const Home = () => {
   };
 
   // console.log(result);
-  const showReasult = () => {
-    if (result !== null) {
-      return result.map(el => {
-        if (el.show) {
-          return (
-            <FlexGrid key={el.show.id}>
-              <ShowCard el={el} />
-            </FlexGrid>
-          );
-        }
-        if (el.person) {
-          return (
-            <FlexGrid key={el.person.id}>
-              <ActorCard el={el} />
-            </FlexGrid>
-          );
-        }
-        return null;
-      });
-    }
-
-    if (result === null) {
-      return <div>search not find</div>;
-    }
-    return null;
-  };
 
   return (
     <MainpageLayout>
@@ -119,7 +122,7 @@ const Home = () => {
         </button>
       </SearchButtonWrapper>
 
-      {showReasult()}
+      {showReasult(result)}
     </MainpageLayout>
   );
 };
