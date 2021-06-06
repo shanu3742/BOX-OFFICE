@@ -27,7 +27,7 @@ function App() {
           <Show />
         </Route>
         <Route>
-          <diV>404 ERROR Page</diV>
+          <div>404 ERROR Page</div>
         </Route>
       </Switch>
     </ThemeProvider>

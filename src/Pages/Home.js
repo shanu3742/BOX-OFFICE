@@ -28,7 +28,7 @@ const Home = () => {
   const onSearch = async () => {
     // console.log(input);
     // now we put input in search
-    const API = `http://api.tvmaze.com/search/${searchOption}?q=${input}`;
+    const API = `https://api.tvmaze.com/search/${searchOption}?q=${input}`;
     try {
       const data = await fetch(API);
       const realdata = await data.json();
