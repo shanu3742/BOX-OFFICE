@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import MainpageLayout from '../component/MainpageLayout';
 import ShowCard from '../component/show/ShowCard';
 import ActorCard from '../component/Actor/ActorCard';
