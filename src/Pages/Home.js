@@ -6,7 +6,7 @@ import { FlexGrid } from '../component/styled';
 import { useLastQueery } from '../misc/custom-hooks';
 import { SearchInput, RadioInputsWrapper } from './Home.styled';
 import { SearchButtonWrapper } from './SearchButtonWrapper';
-import { RadioWrapper } from './CustomRadio';
+import CustomRadio from './CustomRadio';
 
 const Home = () => {
   const [input, setInput] = useLastQueery();
@@ -92,33 +92,32 @@ const Home = () => {
       />
 
       <RadioInputsWrapper>
-        <RadioWrapper htmlFor="shows-search">
-          Shows
-          <input
+        <div>
+          <CustomRadio
+            label="Shows"
             id="shows-search"
-            type="radio"
             value="shows"
             checked={isShowsSearch}
             onClick={onRadioChange}
           />
-        </RadioWrapper>
+        </div>
 
-        <RadioWrapper htmlFor="actors-search">
-          Actors
-          <input
+        <div>
+          <CustomRadio
+            label="Actors"
             id="actors-search"
-            type="radio"
             value="people"
             checked={!isShowsSearch}
             onClick={onRadioChange}
           />
-        </RadioWrapper>
-        <SearchButtonWrapper>
-          <button type="button" onClick={onSearch}>
-            Search
-          </button>
-        </SearchButtonWrapper>
+        </div>
       </RadioInputsWrapper>
+      <SearchButtonWrapper>
+        <button type="button" onClick={onSearch}>
+          Search
+        </button>
+      </SearchButtonWrapper>
+
       {showReasult()}
     </MainpageLayout>
   );
