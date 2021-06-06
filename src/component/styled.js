@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const FlexGrid = styled.div`
   display: inline-flex;
+  margin-left: 30px;
   justify-content: center;
   flex-wrap: wrap;
 `;
