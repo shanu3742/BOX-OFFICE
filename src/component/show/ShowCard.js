@@ -1,11 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useShow } from '../../misc/custom-hooks';
 import StyleShowCard from '../ShowCard.styled';
+import { Star } from '../styled';
 
 import IMAGE_NOT_FOUND from './image/1.png';
 
 const ShowCard = ({ el }) => {
+  // eslint-disable-next-line no-unused-vars
+  const [starredShows, dispatchStarred] = useShow();
+  const isStarred = starredShows.includes(el.show.id);
   const [summary] = [el.show.summary];
+  const onStarClick = () => {
+    if (isStarred) {
+      dispatchStarred({ type: 'REMOVE', showid: el.show.id });
+    } else {
+      dispatchStarred({ type: 'ADD', showid: el.show.id });
+    }
+  };
+
   const summaryAsText = summary
     ? `${summary.split('').slice(0, 50).join('').replace(/<.+?>/g, '')}...`
     : 'No description';
@@ -23,7 +36,9 @@ const ShowCard = ({ el }) => {
       <p>{summaryAsText}</p>
       <div className="btns">
         <Link to={`show/${el.show.id}`}>Read more</Link>
-        <button type="button">Star me</button>
+        <button onClick={onStarClick} type="button">
+          <Star active={isStarred} />
+        </button>
       </div>
     </StyleShowCard>
   );

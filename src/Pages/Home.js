@@ -3,9 +3,10 @@ import MainpageLayout from '../component/MainpageLayout';
 import ShowCard from '../component/show/ShowCard';
 import ActorCard from '../component/Actor/ActorCard';
 import { FlexGrid } from '../component/styled';
+import { useLastQueery } from '../misc/custom-hooks';
 
 const Home = () => {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useLastQueery();
   const [searchOption, setSearchOption] = useState('shows');
   const isShowsSearch = searchOption === 'shows';
   const [result, setResult] = useState([]);
