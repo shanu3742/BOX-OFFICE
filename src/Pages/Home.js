@@ -4,6 +4,9 @@ import ShowCard from '../component/show/ShowCard';
 import ActorCard from '../component/Actor/ActorCard';
 import { FlexGrid } from '../component/styled';
 import { useLastQueery } from '../misc/custom-hooks';
+import { SearchInput, RadioInputsWrapper } from './Home.styled';
+import { SearchButtonWrapper } from './SearchButtonWrapper';
+import { RadioWrapper } from './CustomRadio';
 
 const Home = () => {
   const [input, setInput] = useLastQueery();
@@ -80,7 +83,7 @@ const Home = () => {
 
   return (
     <MainpageLayout>
-      <input
+      <SearchInput
         type="text"
         placeholder="Search For Something"
         onChange={onInputchange}
@@ -88,8 +91,8 @@ const Home = () => {
         value={input}
       />
 
-      <div>
-        <label htmlFor="shows-search">
+      <RadioInputsWrapper>
+        <RadioWrapper htmlFor="shows-search">
           Shows
           <input
             id="shows-search"
@@ -98,9 +101,9 @@ const Home = () => {
             checked={isShowsSearch}
             onClick={onRadioChange}
           />
-        </label>
+        </RadioWrapper>
 
-        <label htmlFor="actors-search">
+        <RadioWrapper htmlFor="actors-search">
           Actors
           <input
             id="actors-search"
@@ -109,12 +112,13 @@ const Home = () => {
             checked={!isShowsSearch}
             onClick={onRadioChange}
           />
-        </label>
-
-        <button type="button" onClick={onSearch}>
-          Search
-        </button>
-      </div>
+        </RadioWrapper>
+        <SearchButtonWrapper>
+          <button type="button" onClick={onSearch}>
+            Search
+          </button>
+        </SearchButtonWrapper>
+      </RadioInputsWrapper>
       {showReasult()}
     </MainpageLayout>
   );

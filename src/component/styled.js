@@ -34,7 +34,7 @@ export const SearchCard = styled.div`
   }
 `;
 export const Star = styled.div`
-  display: inline-block;
+ 
   width: 18px;
   height: 18px;
    background-color: ${props => (props.active ? '#ffc806;' : '#A9A9A9;')}
